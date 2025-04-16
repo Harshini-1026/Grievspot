@@ -1,1 +1,1 @@
-# Grievspot
+# Grievspot - Grievance Management System
