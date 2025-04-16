@@ -1,5 +1,6 @@
 # Grievspot - Grievance Management System
 🚀 Features 
+
 •	Role-based access system (Complainant, Admin, Officer, Reviewer)  
 •	Submit, track, and manage grievances  
 •	Assign grievances to specific officers  
@@ -9,6 +10,7 @@
 
 
 🛠️ Tech Stack
+
 •	Language: Java (Console-based)  
 •	Core Concepts: OOP, Java I/O, Collections Framework, Exception Handling, Serialization  
 •	Tools: File handling (CSV/TXT), Role-based menu system  
@@ -16,6 +18,7 @@
 
 
 🧩 Future Enhancements
+
 •	 Integration with a database (MySQL or SQLite) for scalable data management  
 •	GUI version using JavaFX or Swing for better usability  
 •	Email/SMS notifications on grievance status updates  
