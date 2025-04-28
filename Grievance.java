@@ -1,6 +1,7 @@
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Grievance implements Serializable {
+public class Grievance {
     private static int counter = 1001;
     private int id;
     private String userName, department, category, description, status, assignedOfficer;
@@ -30,17 +31,45 @@ public class Grievance implements Serializable {
         System.out.println("--------------------------------");
     }
 
-    public String toCSV() {
-        return id + "," + userName + "," + department + "," + category + "," +
-               description.replace(",", ";") + "," + assignedOfficer + "," + status;
+    public String toLine() {
+        return id + "|" + userName + "|" + department + "|" + category + "|" +
+               description + "|" + assignedOfficer + "|" + status;
     }
 
-    public static Grievance fromCSV(String line) {
-        String[] p = line.split(",", 7);
-        Grievance g = new Grievance(p[1], p[2], p[3], p[4].replace(";", ","));
+    public static Grievance fromLine(String line) {
+        String[] p = line.split("\\|");
+        Grievance g = new Grievance(p[1], p[2], p[3], p[4]);
         g.id = Integer.parseInt(p[0]);
         g.assignedOfficer = p[5];
         g.status = p[6];
         return g;
+    }
+}
+
+
+class GrievanceManager {
+    private List<Grievance> grievanceList = new ArrayList<>();
+
+    public void load(List<Grievance> loaded) {
+        grievanceList = loaded;
+    }
+
+    public void addGrievance(Grievance g) {
+        grievanceList.add(g);
+        FileStorage.saveGrievances(grievanceList);
+        NotificationManager.notifyUser(g.getUserName(), "Grievance submitted. ID: " + g.getId());
+    }
+
+    public void viewGrievancesByUser(String username) {
+        for (Grievance g : grievanceList) {
+            if (g.getUserName().equals(username)) {
+                g.display();
+            }
+        }
+    }
+}
+class NotificationManager {
+    public static void notifyUser(String user, String msg) {
+        System.out.println("[Notify] To: " + user + " | " + msg);
     }
 }
